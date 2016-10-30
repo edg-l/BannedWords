@@ -67,8 +67,7 @@ namespace BannedWords
                     text = text.Replace(word, replacement);
                 }
                 string text_with_name = ply.Name + ": " + text;
-                ply.SendMessageFromPlayer(text_with_name, ply.Group.R, ply.Group.G, ply.Group.B, ply.Index);
-                Console.WriteLine(text_with_name);
+                TShock.Utils.Broadcast(text_with_name, new Color(ply.Group.R, ply.Group.G, ply.Group.B));
                 args.Handled = true;
                 return;
             }
