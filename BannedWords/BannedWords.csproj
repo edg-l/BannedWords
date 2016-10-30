@@ -49,8 +49,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Example.cs" />
+    <Compile Include="BannedWords.cs" />
+    <Compile Include="ConfigFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="References\Newtonsoft.Json.dll" />
+    <Content Include="References\TerrariaServer.exe" />
+    <Content Include="References\TShockAPI.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
