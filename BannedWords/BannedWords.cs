@@ -13,7 +13,7 @@ namespace BannedWords
         #region Info
         public override string Name { get { return "BannedWords"; } }
         public override string Author { get { return "Ryozuki"; } }
-        public override string Description { get { return "A plugin that ban words in a funny way"; } }
+        public override string Description { get { return "A plugin that censor words."; } }
         public override Version Version { get { return new Version(1, 0, 0); } }
         #endregion
 
