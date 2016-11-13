@@ -6,7 +6,7 @@ namespace BannedWords
 {
     public class ConfigFile
     {
-        public char WordReplacement = '*';
+        public char CensorChar = '*';
         public List<string> BannedWords = new List<string>();
 
         public static ConfigFile Read(string path)

@@ -4,6 +4,8 @@ using System.Linq;
 using Terraria;
 using TerrariaApi.Server;
 using TShockAPI;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace BannedWords
 {
@@ -14,7 +16,7 @@ namespace BannedWords
         public override string Name { get { return "BannedWords"; } }
         public override string Author { get { return "Ryozuki"; } }
         public override string Description { get { return "A plugin that censor words."; } }
-        public override Version Version { get { return new Version(1, 0, 0); } }
+        public override Version Version { get { return new Version(1, 0, 1); } }
         #endregion
 
         public ConfigFile config = new ConfigFile();
@@ -59,15 +61,41 @@ namespace BannedWords
             bool hasBannedWords = config.BannedWords.Any(s => args.Text.Contains(s));
 
             string text = args.Text;
+
             if (hasBannedWords)
             {
                 foreach (string word in config.BannedWords)
                 {
-                    string replacement = new string(config.WordReplacement, word.Length);
-                    text = text.Replace(word, replacement);
+                    string pattern = @"\b{0}\b".SFormat(word);
+                    Match match = Regex.Match(text, pattern);
+
+                    while (match.Success)
+                    {
+                        var replacement = new StringBuilder();
+
+                        var atext = new StringBuilder(text);
+                        
+                        foreach (char w in word)
+                        {
+                            if(w != ' ')
+                                replacement.Append(config.CensorChar);
+                            else
+                                replacement.Append(" ");
+                        }
+                        atext.Remove(match.Index, word.Length).Insert(match.Index, replacement);
+
+                        text = atext.ToString();
+
+                        match = match.NextMatch();
+                    }
+
                 }
-                string text_with_name = ply.Name + ": " + text;
-                TShock.Utils.Broadcast(text_with_name, new Color(ply.Group.R, ply.Group.G, ply.Group.B));
+
+                var formatted_text = String.Format(TShock.Config.ChatFormat, ply.Group.Name, ply.Group.Prefix, ply.Name, ply.Group.Suffix,
+                                             text);
+
+                TShock.Utils.Broadcast(formatted_text, new Color(ply.Group.R, ply.Group.G, ply.Group.B));
+
                 args.Handled = true;
                 return;
             }
