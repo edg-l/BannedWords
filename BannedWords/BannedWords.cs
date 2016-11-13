@@ -6,6 +6,7 @@ using TerrariaApi.Server;
 using TShockAPI;
 using System.Text.RegularExpressions;
 using System.Text;
+using TShockAPI.Hooks;
 
 namespace BannedWords
 {
@@ -31,6 +32,7 @@ namespace BannedWords
         {
             ServerApi.Hooks.GameInitialize.Register(this, OnInitialize);
             ServerApi.Hooks.ServerChat.Register(this, onChat);
+            GeneralHooks.ReloadEvent += OnReload;
         }
         #endregion
 
@@ -40,10 +42,16 @@ namespace BannedWords
             {
                 ServerApi.Hooks.GameInitialize.Deregister(this, OnInitialize);
                 ServerApi.Hooks.ServerChat.Deregister(this, onChat);
+                GeneralHooks.ReloadEvent -= OnReload;
             }
         }
 
         void OnInitialize(EventArgs args)
+        {
+            LoadConfig();
+        }
+
+        private void OnReload(ReloadEventArgs e)
         {
             LoadConfig();
         }
