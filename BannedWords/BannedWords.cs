@@ -7,17 +7,18 @@ using TShockAPI;
 using System.Text.RegularExpressions;
 using System.Text;
 using TShockAPI.Hooks;
+using Microsoft.Xna.Framework;
 
 namespace BannedWords
 {
-    [ApiVersion(1, 25)]
+    [ApiVersion(2, 0)]
     public class BannedWords : TerrariaPlugin
     {
         #region Info
         public override string Name { get { return "BannedWords"; } }
         public override string Author { get { return "Ryozuki"; } }
         public override string Description { get { return "A plugin that censor words."; } }
-        public override Version Version { get { return new Version(1, 0, 1); } }
+        public override Version Version { get { return new Version(1, 0, 2); } }
         #endregion
 
         public ConfigFile config = new ConfigFile();
