@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 
 namespace BannedWords
 {
-    [ApiVersion(2, 0)]
+    [ApiVersion(2, 1)]
     public class BannedWords : TerrariaPlugin
     {
         #region Info
