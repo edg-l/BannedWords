@@ -1,2 +1,4 @@
 language: csharp
 solution: BannedWords.sln
+before_install:
+  - git submodule update --init --recursive
