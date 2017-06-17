@@ -1,0 +1,3 @@
+[submodule "BannedWords/tshock-references"]
+	path = BannedWords/tshock-references
+	url = https://github.com/Ryozuki/tshock-references
